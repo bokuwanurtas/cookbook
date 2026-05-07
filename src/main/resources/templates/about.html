@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>CookBook - About Us</title>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" style="color:green;" th:href="@{/}">CookBook</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" th:href="@{/about}">About us</a></li>
+                </ul>
+                <sec:authorize access="isAuthenticated()">
+                    <a class="btn btn-outline-secondary me-2" th:href="@{/user-profile}">My Profile</a>
+                    <a class="btn btn-outline-danger" th:href="@{/logout}">Logout</a>
+                </sec:authorize>
+                <sec:authorize access="!isAuthenticated()">
+                    <a class="btn btn-primary me-1" th:href="@{/login}">Sign In</a>
+                    <a class="btn btn-secondary" th:href="@{/register}">Sign Up</a>
+                </sec:authorize>
+            </div>
+        </div>
+    </nav>
+</header>
+<hr>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h1 style="color:green;">About CookBook</h1>
+            <p class="lead mt-4">
+                CookBook is a community-driven recipe platform where food lovers
+                share and discover delicious meals from around the world.
+            </p>
+            <p>
+                Whether you're a seasoned chef or a kitchen beginner, CookBook has
+                something for everyone. Create your own recipes, mark your favourites,
+                and explore creations from fellow food enthusiasts.
+            </p>
+            <a class="btn btn-success mt-3" th:href="@{/}">Browse Recipes</a>
+        </div>
+    </div>
+</div>
+
+<footer class="col-12 mt-5" id="footer">
+    <div><h1><b>CookBook</b></h1>
+        <p>Discover delicious recipes and culinary inspiration for every occasion.</p></div>
+    <div class="links"><h1><b>Quick Links</b></h1>
+        <ul class="navbar-nav">
+            <li><a class="nav-link" th:href="@{/}">Home</a></li>
+            <li><a class="nav-link" th:href="@{/about}">About us</a></li>
+        </ul>
+    </div>
+    <div style="text-align:right;"><h1><b>Contact Us</b></h1>
+        <ul class="navbar-nav">
+            <li><a class="nav-link" href="#">Instagram</a></li>
+            <li><a class="nav-link" href="#">Facebook</a></li>
+        </ul>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

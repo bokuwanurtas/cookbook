@@ -1,0 +1,57 @@
+.inputData {
+    width: 100%;
+    max-width: 500px;
+    margin: 50px auto; /* Center the form */
+    padding: 20px;
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background-color: #f9f9f9; /* Light background */
+}
+
+.inputData form {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputData label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.inputData input[type="text"],
+.inputData input[type="url"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px; /* Rounded corners for inputs */
+    margin-bottom: 20px;
+    box-sizing: border-box; /* Prevent overflow */
+    transition: border-color 0.3s ease; /* Smooth focus effect */
+}
+
+.inputData input[type="text"]:focus,
+.inputData input[type="url"]:focus {
+    border-color: #007bff; /* Blue border on focus */
+    outline: none; /* Remove default outline */
+}
+
+.inputData input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #007bff; /* Blue button */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.inputData input[type="submit"]:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}

@@ -1,0 +1,54 @@
+body {
+    background-color: #e8f5e9;
+    
+}
+.form-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px; 
+    margin: 50px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+.form-container h2 {
+    color: #388e3c;
+
+
+}
+
+.btn-green {
+    background-color: #388e3c;
+    color: white;
+
+
+
+}
+.btn-green:hover {
+    background-color: #2e7d32;
+}
+.toggle-btn {
+
+
+    cursor: pointer;
+    color: #388e3c;
+    text-decoration: underline;
+}
+
+.forms {
+    display: flex;
+    transition: transform 0.5s ease;
+
+     width: 200%;  /*что бы две формы были в одной странице*/
+}
+
+.form {
+    width: 50%; /*что бы каждая форма занимала половину ширины контейнера */
+    padding: 20px;
+
+}
+#register-form{
+    margin-left: 30px;
+}

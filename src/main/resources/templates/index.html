@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>CookBook</title>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="col-12">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand col-3" style="color: green;" th:href="@{/}">CookBook</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse col-4" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" th:href="@{/}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/about}">About us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#footer">Contact</a></li>
+                </ul>
+                <div class="d-flex search">
+                    <input class="form-control me-2" type="search" placeholder="Search"
+                           id="search_input">
+                    <button class="btn btn-outline-success" id="search_btn">Search</button>
+
+                    <sec:authorize access="isAuthenticated()">
+                        <a class="profile ms-2" th:href="@{/user-profile}">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png"
+                                 alt="User Icon" width="40px"/>
+                        </a>
+                    </sec:authorize>
+                </div>
+                <sec:authorize access="!isAuthenticated()">
+                    <div class="login ms-2">
+                        <a class="btn btn-primary" th:href="@{/login}">Sign In</a>
+                        <a class="btn btn-secondary" th:href="@{/register}">Sign Up</a>
+                    </div>
+                </sec:authorize>
+            </div>
+        </div>
+    </nav>
+</header>
+<hr>
+
+<div class="container-fluid main">
+    <!-- Featured Recipe -->
+    <div class="col-12 feature">
+        <h1>Featured Recipe</h1>
+        <div class="card" th:if="${featured}">
+            <div class="card-body card-feature">
+                <h2 th:text="${featured.name}">Recipe Name</h2>
+                <p th:text="${featured.description}">Description</p>
+                <a class="btn btn-success" th:href="@{/recipe/{id}(id=${featured.id})}">View Recipe</a>
+            </div>
+        </div>
+        <div class="card" th:unless="${featured}">
+            <div class="card-body"><p>No featured recipe at the moment.</p></div>
+        </div>
+    </div>
+
+    <!-- Latest Recipes -->
+    <div class="col-12 recipe row mt-4" id="recipes_section">
+        <h1>Latest Recipes</h1>
+        <div class="row" id="recipe_div">
+            <div class="col-md-4 mb-4" th:each="recipe : ${recipes}">
+                <div class="card recipe-card h-100">
+                    <img th:src="${recipe.imageUrl != null && !recipe.imageUrl.startsWith('http')
+                                   ? '/images/' + recipe.imageUrl
+                                   : (recipe.imageUrl != null ? recipe.imageUrl : '/images/grey.jpg')}"
+                         th:alt="${recipe.name}" class="card-img-top"
+                         style="height:180px;object-fit:cover;"
+                         onerror="this.src='/images/grey.jpg'">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title" th:text="${recipe.name}">Recipe</h5>
+                        <p class="card-text flex-grow-1" th:text="${recipe.description}">Desc</p>
+                        <div class="d-flex gap-2 mt-2">
+                            <a class="btn btn-primary btn-sm"
+                               th:href="@{/recipe/{id}(id=${recipe.id})}">Let's cook</a>
+
+                            <sec:authorize access="isAuthenticated()">
+                                <button class="btn btn-sm fav-btn"
+                                        th:classappend="${favouriteIds != null and favouriteIds.contains(recipe.id)} ? 'btn-warning' : 'btn-outline-warning'"
+                                        th:data-recipe-id="${recipe.id}"
+                                        th:data-is-fav="${favouriteIds != null and favouriteIds.contains(recipe.id)}">
+                                    ★
+                                </button>
+                            </sec:authorize>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:if="${#lists.isEmpty(recipes)}" class="col-12">
+                <p>No recipes found.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="col-12 mt-5" id="footer">
+    <div>
+        <h1><b>CookBook</b></h1>
+        <p>Discover delicious recipes and culinary inspiration for every occasion.</p>
+    </div>
+    <div class="links">
+        <h1><b>Quick Links</b></h1>
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/about}">About us</a></li>
+        </ul>
+    </div>
+    <div style="text-align:right;">
+        <h1><b>Contact Us</b></h1>
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="#">Instagram</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Facebook</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

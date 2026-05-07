@@ -1,0 +1,11 @@
+#my-recipes, #favorite-recipes, #add-recipe {
+    margin-top: 20px;
+}
+.ed-button{
+    display: flex;
+    padding-left: 10px;
+    justify-content: space-between;
+}
+.button{
+    margin-right: 20px;
+}
